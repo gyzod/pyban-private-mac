@@ -37,6 +37,10 @@ docker-compose.yml
 *.backup
 *.old
 
+# Scripts
+start.sh
+backup.sh
+
 # Data directories
 data/
 config/
