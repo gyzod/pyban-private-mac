@@ -1,0 +1,26 @@
+services:
+  pyban_private_mac:
+    build: .
+    container_name: pyban_private_mac
+    restart: unless-stopped
+    environment:
+      # UniFi Controller Configuration
+      UNIFI_IP: "192.168.2.1"
+      UNIFI_OS: "true"                    # Set to "true" for UDM/UCG, "false" for legacy
+      UNIFI_PORT: "443"                   # 443 for UniFi OS, 8443 for legacy
+      UNIFI_USERNAME: "admin"
+      UNIFI_PASSWORD: "your-password"
+      UNIFI_SITE_ID: "default"
+      UNIFI_SSL_VERIFY: "false"           # Set to "true" if using valid SSL cert
+
+      # Device Whitelist (comma-separated MAC addresses)
+      WHITELIST: "aa:bb:cc:dd:ee:ff,11:22:33:44:55:66"
+
+      # Scan interval in seconds
+      SCAN_INTERVAL: "10"
+
+      # Home Assistant Notifications (optional)
+      HA_URL: "http://homeassistant.local:8123"
+      HA_TOKEN: ""                        # Leave empty to disable notifications
+      HA_NOTIFY_SERVICE: "notify.mobile_app"
+      HA_VERIFY: "true"

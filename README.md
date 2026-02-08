@@ -30,18 +30,39 @@ A MAC address is considered private if the second character is `2`, `6`, `A`, or
 
 1. Clone this repository:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/your-username/pyban-private-mac.git
    cd pyban_private_mac
    ```
 
-2. Edit `docker-compose.yml` and configure your environment variables (see below)
-
-3. Build and start the container:
+2. Create your configuration from the example:
    ```bash
+   cp docker-compose.example.yml docker-compose.yml
+   ```
+
+3. Edit `docker-compose.yml` and configure your environment variables (see Configuration section below)
+
+4. Build and start the container:
+   ```bash
+   docker compose up -d
+   ```
+   
+   Or use the provided script:
+   ```bash
+   chmod +x start.sh
    ./start.sh
    ```
 
 ## Configuration
+
+### Quick Start
+
+A sample `docker-compose.example.yml` is provided. To use it:
+
+```bash
+cp docker-compose.example.yml docker-compose.yml
+# Edit docker-compose.yml with your settings
+docker compose up -d
+```
 
 ### Environment Variables
 
@@ -128,10 +149,12 @@ docker compose down
 
 ⚠️ **Important**: This script requires admin credentials to your UniFi controller. Use a dedicated local admin account with appropriate restrictions.
 
-- Store credentials securely in your `docker-compose.yml` 
-- Consider using Docker secrets in production
-- Restrict network access to the container
-- Regularly review the whitelist to ensure it includes all your devices
+**DO NOT commit `docker-compose.yml` to git** - it contains sensitive credentials. The `.gitignore` is configured to exclude it.
+
+To share configuration safely:
+- Distribute `docker-compose.example.yml` (no sensitive data)
+- Users copy it to `docker-compose.yml` and fill in their own credentials
+- Keep credentials in your local `docker-compose.yml` only
 
 ## Troubleshooting
 
